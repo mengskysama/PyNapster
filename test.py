@@ -3,6 +3,18 @@ import Message
 import struct
 import re
 
+
+
+l = []
+for i in range(1,999999):
+    l.append('D:\code\gfgh.txt')
+d = []
+print 'done'
+for i in l:
+    if i.find('txt'):
+        d = d
+print 'done'
+
 address = ('127.0.0.1', 8888)
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect(address)
@@ -39,5 +51,4 @@ messageParse(data)
 print 'the data received is', data
 
 s.send('hihi')
-
 s.close()

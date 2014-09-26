@@ -27,6 +27,7 @@ class MessageProcess():
 
     @staticmethod
     def login(handler, msg_data):
+        #2
         #<nick> <password> <port> "<client-info>" <link-type> [ <num> ]
         if len(msg_data) < 5:
             MessageProcess.error_message(handler, 'protocol err')
@@ -34,9 +35,45 @@ class MessageProcess():
         handler.stage = 2
         MessageProcess.message_of_the_day_resp(handler, 'Welcom!')
         MessageProcess.server_stats_resp(handler, '123 1 1024')
+
     @staticmethod
     def login_ack(handler, msg_data):
+        #3
+        #<email>
         MessageProcess.send_message(handler, 3, msg_data)
+
+    #4 version check [CLIENT]
+    #5 "auto-upgrade" [SERVER]
+    #6 new user login Utatane  not use
+    #7 nick check [CLIENT] Utatane  not use
+    #8 nickname not registered [SERVER] #7 Utatane not use
+    #9 nickname already registered [SERVER] Utatane not use
+    #10 invalid nickname [SERVER] Utatane not use
+    #11 12 13 14 Utatane not use
+
+    @staticmethod
+    def client_notification_of_shared_file(handler, msg_data):
+        #100
+        #Utatane not use
+        #"<filename>" <md5> <size> <bitrate> <frequency> <time>
+        pass
+
+    #102 (0x66)	remove file [CLIENT] Utatane not use
+    #110		unshare all files [CLIENT] Utatane not use
+
+    @staticmethod
+    def client_search_request(handler, msg_data):
+        #200 [FILENAME CONTAINS "artist name"] MAX_RESULTS <max> [FILENAME CONTAINS
+        #"song"] [LINESPEED <compare> <link-type>] [BITRATE <compare> "<br>"] [FREQ
+        #<compare> "<freq>"] [WMA-FILE] [LOCAL_ONLY]
+        #Utatane
+        #FILENAME CONTAINS "exe" BITRATE "EQUAL TO" "24" FREQ "EQUAL TO" "16000"
+        #FILENAME CONTAINS "exe" ALL  MP3/ALL
+        #FILENAME CONTAINS "exe" BITRATE "AT LEAST" "128"
+        #FILENAME CONTAINS "exe" BITRATE "AT LEAST" "128" SIZE "AT BEST" 1024
+        #FILENAME CONTAINS "exe" LINESPEED "AT LEAST" 5 BITRATE "AT LEAST" "128" SIZE "AT BEST" 1024
+        #FILENAME CONTAINS "exe" LINESPEED "AT LEAST" 10 BITRATE "AT LEAST" "128" SIZE "EQUAL TO" 1024
+        pass
 
     @staticmethod
     def private_message(handler, msg_data):
@@ -68,11 +105,12 @@ class MessageProcess():
         #211
         #the client sends this message when it wants to get a list of the files shared by a specific client
         #<nick>
-        #发送文件
-        MessageProcess.browse_response(handler, '"generic band - generic song.mp3" '
-                                                'b92870e0d41bc8e698cf2f0a1ddfeac7 443332 128 44100 60')
+        #发送文件信息
+        MessageProcess.browse_response(handler, 'mengskysama "D:\\a.rar" '
+                                                '00000000000000000000000000000000 1024 0 0 0')
         #发送结束
-        MessageProcess.end_of_browse_list(handler, msg_data)
+        #why ip ret 0?
+        MessageProcess.end_of_browse_list(handler, 'mengskysama 0')
 
     @staticmethod
     def browse_response(handler, msg_data):
