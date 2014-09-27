@@ -3,17 +3,32 @@ import Message
 import struct
 import re
 
+import time
+import random
 
+def rnd_data(n):
+    data = ''
+    while len(data) < n:
+        temp = chr(random.randint(0,255))
+        data = data.join(['', temp])
+    return data
 
 l = []
-for i in range(1,999999):
-    l.append('D:\code\gfgh.txt')
+start = time.clock()
+s = 'sdsfsddsfgtxdewtxt'
+for i in range(0,100000):
+    l.append(rnd_data(20))
 d = []
-print 'done'
+end = time.clock()
+print end-start
+
+start = time.clock()
 for i in l:
     if i.find('txt'):
         d = d
-print 'done'
+#run code
+end = time.clock()
+print end-start
 
 address = ('127.0.0.1', 8888)
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
