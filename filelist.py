@@ -25,7 +25,16 @@ class FileList(object):
     def __init__(self):
         self.lst = []
 
-    def get_files_by_name_include(self, include, max = 2000):
+    def del_files_by_filename(self, filename):
+        if type(filename) is not str:
+            return
+        ret = []
+        for i in self.lst:
+            if i.filename == filename:
+                self.lst.remove(i)
+                return
+
+    def get_files_by_filename_include(self, include, max = 2000):
         if type(include) is not str:
             return
         ret = []
