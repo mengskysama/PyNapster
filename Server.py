@@ -83,7 +83,5 @@ class NapsterFactory(Factory):
         protocol = NapsterProtocol
         self.user = {}
 
-
-
 reactor.listenTCP(8888, NapsterFactory())
 reactor.run()

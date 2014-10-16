@@ -16,7 +16,7 @@ class File(object):
         self.weight = weight
 
     def __list__(self):
-        return [self.filename, self.md5, self.size , self.bitrate,
+        return [self.filename, self.md5, self.size, self.bitrate,
                 self.frequency, self.length, self.nick, self.link, self.weight]
 
 
@@ -25,9 +25,13 @@ class FileList(object):
     def __init__(self):
         self.lst = []
 
-    def find_files_by_name_include(self, include):
+    def get_files_by_name_include(self, include, max = 2000):
+        if type(include) is not str:
+            return
         ret = []
         for i in self.lst:
             if i.filename.find(include) != -1:
                 ret.append(i)
+                if len(ret) > max:
+                    break
         return ret
